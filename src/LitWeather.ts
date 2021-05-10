@@ -1,8 +1,8 @@
 import { LitElement, html, css, property } from 'lit-element';
-import { openWcLogo } from './open-wc-logo.js';
+import './city-input'
 
 export class LitWeather extends LitElement {
-  @property({ type: String }) title = 'My app';
+  @property({ type: String }) title = 'What\'s the weather like?';
 
   static styles = css`
     :host {
@@ -23,20 +23,6 @@ export class LitWeather extends LitElement {
       flex-grow: 1;
     }
 
-    .logo > svg {
-      margin-top: 36px;
-      animation: app-logo-spin infinite 20s linear;
-    }
-
-    @keyframes app-logo-spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
     .app-footer {
       font-size: calc(12px + 0.5vmin);
       align-items: center;
@@ -50,28 +36,14 @@ export class LitWeather extends LitElement {
   render() {
     return html`
       <main>
-        <div class="logo">${openWcLogo}</div>
         <h1>${this.title}</h1>
 
-        <p>Edit <code>src/LitWeather.ts</code> and save to reload.</p>
-        <a
-          class="app-link"
-          href="https://open-wc.org/guides/developing-components/code-examples"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code examples
-        </a>
+        <city-input></city-input>
+
       </main>
 
       <p class="app-footer">
-        🚽 Made with love by
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/open-wc"
-          >open-wc</a
-        >.
+        this is a footer
       </p>
     `;
   }
