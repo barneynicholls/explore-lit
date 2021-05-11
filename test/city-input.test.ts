@@ -1,4 +1,6 @@
-import { html, fixture, expect, elementUpdated  } from '@open-wc/testing';
+import { html, fixture, expect } from '@open-wc/testing';
+import { stub } from 'sinon';
+import { oneEvent } from '@open-wc/testing';
 
 import { CityInput } from '../src/CityInput.js';
 import '../src/city-input.js';
@@ -19,12 +21,29 @@ describe('LitWeather', () => {
     await expect(element).shadowDom.to.be.accessible();
   });
 
-  it('updates city on input change', async ()=>{
-    const inputElement = await element.shadowRoot!.querySelector('input')!;
-    const cityElement = await element.shadowRoot!.querySelector('p')!;
-    const cityName = "a city name";
-    inputElement.value = "kkk";
-    await elementUpdated(inputElement);
-    expect(cityElement).to.have.text(cityName);
+  // it('updates city on input change', async ()=>{
+  //   const inputElement = await element.shadowRoot!.querySelector('input')!;
+  //   const cityElement = await element.shadowRoot!.querySelector('p')!;
+  //   const cityName = "a city name";
+  //   inputElement.value = "kkk";
+  //   await elementUpdated(inputElement);
+  //   expect(cityElement).to.have.text(cityName);
+  // });
+
+  it('button click calls handler', async () => {
+    const functionStub = stub(element, 'handleClick');
+    element.requestUpdate();
+    await element.updateComplete;
+    element.shadowRoot!.querySelector('button')!.click();
+    expect(functionStub).to.have.callCount(1);
   });
+
+  // it('button click calls search handler', async () => {
+
+  //   setTimeout(() => element.shadowRoot!.querySelector('button')!.click());
+
+  //   const { detail } = await oneEvent(element, 'search');
+
+  //   expect(detail).to.be.true;
+  // });
 });
